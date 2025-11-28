@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio - Fauzi</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome untuk ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #635cec;
+            --secondary-color: #4f5063;
+            --dark-bg: #121212;
+            --dark-card: #1e1e1e;
+            --text-light: #f8f9fa;
+            --text-muted: #adb5bd;
+        }
+
+        body {
+            font-family: 'Inconsolata', monospace;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: "Bebas Neue", sans-serif;
+            font-style: normal;
+        }
+
+        /* Animasi masuk */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: rgba(18, 18, 18, 0.9) !important;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-color) !important;
+        }
+
+        .nav-link {
+            color: var(--text-light) !important;
+            font-weight: 500;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+
+            /* Overlay hitam + gambar */
+            background:
+                linear-gradient(rgba(0, 0, 0, 0.37), rgba(0, 0, 0, 0.37)),
+                url("img/bg.png") no-repeat center center/cover;
+            position: relative;
+            overflow: hidden;
+        }
+
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            filter: blur(100px);
+            opacity: 0.3;
+            top: 10%;
+            left: 10%;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: var(--secondary-color);
+            filter: blur(100px);
+            opacity: 0.3;
+            bottom: 10%;
+            right: 10%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 12px 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #5a52d5;
+            border-color: #5a52d5;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(108, 99, 255, 0.3);
+        }
+
+        /* Section umum */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* About */
+        .about-content {
+            background-color: var(--dark-card);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Skills */
+        .skills-container {
+            position: relative;
+            margin-top: 50px;
+        }
+
+        .orbit {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+            border-radius: 50%;
+            border: 2px solid rgba(108, 99, 255, 0.3);
+            animation: rotate 30s linear infinite;
+        }
+
+        .skill-item {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--dark-card);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 20px rgba(108, 99, 255, 0.4);
+        }
+
+        .skill-item i {
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+
+        .skill-item:nth-child(1) {
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .skill-item:nth-child(2) {
+            top: 15%;
+            right: 15%;
+        }
+
+        .skill-item:nth-child(3) {
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+        }
+
+        .skill-item:nth-child(4) {
+            bottom: 15%;
+            right: 15%;
+        }
+
+        .skill-item:nth-child(5) {
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .skill-item:nth-child(6) {
+            bottom: 15%;
+            left: 15%;
+        }
+
+        .skill-item:nth-child(7) {
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+        }
+
+        .skill-item:nth-child(8) {
+            top: 15%;
+            left: 15%;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Portfolio */
+        .portfolio-item {
+            background-color: var(--dark-card);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(108, 99, 255, 0.3);
+        }
+
+        .portfolio-img {
+            height: 200px;
+            background-color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .portfolio-content {
+            padding: 20px;
+        }
+
+        .certificate-card {
+            transition: transform .3s ease, box-shadow .3s ease;
+            border-radius: 10px;
+        }
+
+        .certificate-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(108, 99, 255, 0.3);
+        }
+
+        .certificate-card img {
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            object-fit: cover;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0a0a0a;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        section {
+            background-color: #0a0a0a;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--dark-card);
+            color: var(--text-light);
+            line-height: 40px;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        /* Responsif */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .orbit {
+                width: 300px;
+                height: 300px;
+            }
+
+            .skill-item {
+                width: 60px;
+                height: 60px;
+            }
+
+            .skill-item i {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><b>PORTOFOLIO</b></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#portfolio">Project</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#certificates">Certificates</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="row align-items-center">
+
+                <!-- Teks -->
+                <div class="col-lg-6 hero-content">
+                    <h1 class="fade-in">Halo, I'm Muhammad Fauzi Habibi</h1>
+                    <p class="fade-in">I am a Full Stack Website Developer.</p>
+                </div>
+
+                <!-- Foto Profil -->
+                <div class="col-lg-6 text-center fade-in">
+                    <div class="profile-img mx-auto" style="
+                        width: 200px;
+                        height: 200px;
+                        border-radius: 50%;
+                        overflow: hidden;
+                        border: 5px solid var(--primary-color);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;">
+
+                        <!-- Ganti src dengan foto kamu -->
+                        <img src="img/pp2.jpg" alt="Profile" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <section id="about">
+        <div class="container">
+            <div class="row align-items-center">
+
+                <!-- Kolom Kiri - Tentang Saya -->
+                <div class="col-lg-6 mb-4 fade-in">
+                    <h2 class="section-title">About me</h2>
+                    <p>Hello! I'm a software developer with over 3 years of experience in the technology industry.
+                        I'm passionate about creating engaging and functional web applications.</p>
+                    <p>I have expertise in various technologies, including JavaScript, React, Node.js, and more.
+                        I'm always eager to learn new technologies and the challenges of software development.</p>
+                    <p>Besides coding, I also enjoy UI/UX design, photography, and traveling.
+                        I believe that the combination of creativity and logic is the key to creating extraordinary
+                        digital products.</p>
+                </div>
+
+                <!-- Kolom Kanan - Skills -->
+                <div class="col-lg-6 fade-in">
+
+                    <div class="skills-container d-flex justify-content-center">
+                        <div class="orbit">
+
+                            <div class="skill-item">
+                                <i class="fab fa-html5"></i>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fab fa-css3-alt"></i>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fab fa-js"></i>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fab fa-react"></i>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fab fa-laravel"></i>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fab fa-bootstrap"></i>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fab fa-php"></i>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fas fa-database"></i>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        <div class="container">
+            <h2 class="section-title fade-in">My Project</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="portfolio-item fade-in">
+                        <div class="portfolio-img">
+                            <img src="img/project1.png" alt="Profile" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="portfolio-content">
+                            <h4>Belajarcoding.id</h4>
+                            <p>A basic landing page is a simple, responsive layout built with HTML, CSS, and JavaScript. 
+                                It presents key information clearly and adapts smoothly to all screen sizes for a user-friendly experience.</p>
+                            <a href="#" class="btn btn-sm btn-outline-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="portfolio-item fade-in">
+                        <div class="portfolio-img">
+                            <img src="img/project2.png" alt="Profile" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="portfolio-content">
+                            <h4>Acme Rockets</h4>
+                            <p>A basic Tailwind CSS landing page uses utility classes to create a clean, and website with 
+                                responsive design that automatically adapts to the user’s device theme for a seamless experience.</p>
+                            <a href="#" class="btn btn-sm btn-outline-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="portfolio-item fade-in">
+                        <div class="portfolio-img">
+                            <img src="img/project3.png" alt="Profile" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="portfolio-content">
+                            <h4>Laracamp</h4>
+                            <p>An e-learning landing page built with Bootstrap offers a clean and responsive layout that showcases courses and learning features. 
+                                It adapts smoothly to all screen sizes, providing a simple and user-friendly experience.</p>
+                            <a href="#" class="btn btn-sm btn-outline-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="portfolio-item fade-in">
+                        <div class="portfolio-img">
+                            <img src="img/project4.png" alt="Profile" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="portfolio-content">
+                            <h4>Organic</h4>
+                            <p>This food e-commerce landing page built with Bootstrap offers a clean, responsive layout for showcasing products, promotions, and ordering features. Responsive, it provides a smooth and user-friendly experience.</p>
+                            <a href="#" class="btn btn-sm btn-outline-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="portfolio-item fade-in">
+                        <div class="portfolio-img">
+                            <img src="img/project5.png" alt="Profile" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="portfolio-content">
+                            <h4>Pengaduan App</h4>
+                            <p>A public complaint system built with Laravel, Livewire, and MySQL allows users to submit and track reports in real time 
+                                with secure processing and efficient data management features.</p>
+                            <a href="#" class="btn btn-sm btn-outline-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="portfolio-item fade-in">
+                        <div class="portfolio-img">
+                            <img src="img/project6.png" alt="Profile" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="portfolio-content">
+                            <h4>Creative computer</h4>
+                            <p>An e-commerce platform built with Laravel and Livewire provides real-time interactions, secure transactions, 
+                                and complete features like product browsing, cart, checkout, and admin product management.</p>
+                            <a href="#" class="btn btn-sm btn-outline-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="certificates">
+        <div class="container">
+            <h2 class="section-title text-center fade-in mb-5">My Certificate</h2>
+
+            <div class="row g-4">
+
+                <!-- Sertifikat 1 -->
+                <div class="col-md-4 fade-in">
+                    <div class="card bg-secondary text-light border-0 certificate-card">
+                        <img src="img/sertifikat1.png" class="card-img-top" alt="Certificate 1">
+                        <div class="card-body bg-dark rounded-bottom-3">
+                            <h5 class="card-title">Web Development</h5>
+                            <p class="card-text">Available at Sololearn on Wednesday, November 19, 2025.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sertifikat 2 -->
+                <div class="col-md-4 fade-in">
+                    <div class="card bg-secondary text-light border-0 certificate-card">
+                        <img src="img/sertifikat2.png" class="card-img-top" alt="Certificate 2">
+                        <div class="card-body bg-dark rounded-bottom-3">
+                            <h5 class="card-title">Php With MySql</h5>
+                            <p class="card-text">Available at Udemy on Monday, November 17, 2025.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sertifikat 3 -->
+                <div class="col-md-4 fade-in">
+                    <div class="card bg-secondary text-light border-0 certificate-card">
+                        <img src="img/sertifikat3.png" class="card-img-top" alt="Certificate 3">
+                        <div class="card-body bg-dark rounded-bottom-3">
+                            <h5 class="card-title">Html Css Websites</h5>
+                            <p class="card-text">Available at Udemy on Saturday, November 15, 2025.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sertifikat 4 -->
+                <div class="col-md-4 fade-in">
+                    <div class="card bg-secondary text-light border-0 certificate-card">
+                        <img src="img/sertifikat4.png" class="card-img-top" alt="Certificate 4">
+                        <div class="card-body bg-dark rounded-bottom-3">
+                            <h5 class="card-title">Management Project</h5>
+                            <p class="card-text">Available at Dicoding on Thursday, November 13, 2025.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sertifikat 5 -->
+                <div class="col-md-4 fade-in">
+                    <div class="card bg-secondary text-light border-0 certificate-card">
+                        <img src="img/sertifikat5.png" class="card-img-top" alt="Certificate 5">
+                        <div class="card-body bg-dark rounded-bottom-3">
+                            <h5 class="card-title">AI base</h5>
+                            <p class="card-text">Available at Dicoding on Tuesday, November 4, 2025.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-links mb-4">
+                <a href="https://www.linkedin.com/in/muhammad-fauzi-habibi-200793371?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/muhammadfauzihabibi" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://wa.me/6282233021251" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.instagram.com/fauzihabibi_/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="mailto:habibi.muhammad.fauzi@gmail.com?subject=Halo&body=Saya ingin bertanya..." target="_blank"><i class="fa fa-envelope"></i></a>
+            </div>
+            <p>&copy; 2025 FauziProject. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Animasi scroll
+        document.addEventListener('DOMContentLoaded', function () {
+            const fadeElements = document.querySelectorAll('.fade-in');
+
+            const fadeInOnScroll = function () {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150;
+
+                    if (elementTop < window.innerHeight - elementVisible) {
+                        element.classList.add('appear');
+                    }
+                });
+            };
+
+            // Jalankan sekali saat halaman dimuat
+            fadeInOnScroll();
+
+            // Jalankan saat scroll
+            window.addEventListener('scroll', fadeInOnScroll);
+
+            // Smooth scroll untuk navigasi
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 70,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Navbar background saat scroll
+            window.addEventListener('scroll', function () {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 50) {
+                    navbar.style.backgroundColor = 'rgba(18, 18, 18, 0.95)';
+                    navbar.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+                } else {
+                    navbar.style.backgroundColor = 'rgba(18, 18, 18, 0.9)';
+                    navbar.style.boxShadow = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
